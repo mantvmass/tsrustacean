@@ -242,4 +242,4 @@ Feel free to contribute if you want to add more Rust-like features to this crazy
 
 ## License 📜
 
-MIT License.
+The PMSoyer framework is open-sourced software licensed under the [MIT license]("/LICENSE").
