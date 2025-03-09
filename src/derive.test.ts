@@ -8,6 +8,9 @@ class UserDTO {
     id: string;
     @serde({ serialize_with: (v: number) => v / 100 })
     balance: number;
+    @serde({ default: "Sun, 09 Mar 2025 14:58:21 GMT", rename: "createdAt" })
+    // @ts-expect-error
+    created_at: string;
 
     constructor(id: string, balance: number) {
         this.id = id;
@@ -25,7 +28,7 @@ describe("derive with dynamic plugin types", () => {
     test("Serialize works with custom serializer", () => {
         const user = new UserDTO("1", 10000);
         // @ts-expect-error
-        expect(user.serialize()).toEqual({ id: "1", balance: 100 });
+        expect(user.serialize()).toEqual({ id: "1", balance: 100, createdAt: "Sun, 09 Mar 2025 14:58:21 GMT" });
     });
 
     test("Deserialize works with plain object", () => {
@@ -33,7 +36,7 @@ describe("derive with dynamic plugin types", () => {
         const user = UserDTO.deserialize({ id: "2", balance: 20000 });
         expect(user.id).toBe("2");
         expect(user.balance).toBe(20000);
-        expect(user.serialize()).toEqual({ id: "2", balance: 200 });
+        expect(user.serialize()).toEqual({ id: "2", balance: 200, createdAt: "Sun, 09 Mar 2025 14:58:21 GMT" });
     });
 
     test("from converts source object", () => {
@@ -42,7 +45,7 @@ describe("derive with dynamic plugin types", () => {
         const user = UserDTO.from(raw);
         expect(user.id).toBe("3");
         expect(user.balance).toBe(30000);
-        expect(user.serialize()).toEqual({ id: "3", balance: 300 });
+        expect(user.serialize()).toEqual({ id: "3", balance: 300, createdAt: "Sun, 09 Mar 2025 14:58:21 GMT" });
     });
 
     test("No methods added without features", () => {
