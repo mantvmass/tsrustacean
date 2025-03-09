@@ -1,4 +1,4 @@
-import { Option, Result, String } from "./types";
+import { Option, Result, String } from "../types";
 
 describe("Option", () => {
     test("some creates Option with value", () => {

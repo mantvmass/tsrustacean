@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import { derive } from "./derive";
-import { serde, Serialize, Deserialize } from "./lib/serde";
+import { derive } from "../derive";
+import { serde, Serialize, Deserialize } from "../lib/serde";
 
 // Use array literal with as const to ensure proper type inference
 @derive([Serialize, Deserialize] as const)
@@ -9,8 +9,7 @@ class UserDTO {
     @serde({ serialize_with: (v: number) => v / 100 })
     balance: number;
     @serde({ default: "Sun, 09 Mar 2025 14:58:21 GMT", rename: "createdAt" })
-    // @ts-expect-error
-    created_at: string;
+    created_at?: string;
 
     constructor(id: string, balance: number) {
         this.id = id;

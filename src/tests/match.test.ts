@@ -1,5 +1,5 @@
-import { Option, Result } from "./types";
-import { Match } from "./match";
+import { Option, Result } from "../types";
+import { Match } from "../match";
 
 describe("Match with Option", () => {
     test("matches Some case", () => {
