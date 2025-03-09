@@ -1,4 +1,4 @@
-# Rustify
+# Rustify TS
 
 ## 🤔 What is this?
 
@@ -23,7 +23,7 @@ This library implements Rust-like features in TypeScript, including:
 ### `Option<T>`
 
 ```typescript
-import { Option } from "rustify";
+import { Option } from "rustify-ts";
 
 const someValue = Option.some(42);
 console.log(someValue.unwrap()); // 42
@@ -53,7 +53,7 @@ console.log(unknownUser.unwrapOr("Guest")); // "Guest"
 ### `Result<T, E>`
 
 ```typescript
-import { Result } from "rustify";
+import { Result } from "rustify-ts";
 
 const success = Result.ok<number, string>(100);
 console.log(success.unwrap()); // 100
@@ -82,7 +82,7 @@ console.log(result2.unwrapErr()); // "Division by zero"
 ### Pattern Matching with `Match`
 
 ```typescript
-import { Match, Option, Result } from "rustify";
+import { Match, Option, Result } from "rustify-ts";
 
 const opt = Option.some(42);
 const result = Match.on(opt)
@@ -227,7 +227,7 @@ registerPlugin(loggablePlugin);
 ## Installation 📦
 
 ```sh
-npm install rustify
+npm install rustify-ts
 ```
 
 ## Contributing 🤝
