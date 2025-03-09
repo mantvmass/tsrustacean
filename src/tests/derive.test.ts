@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { derive } from "../derive";
-import { serde, Serialize, Deserialize } from "../lib/serde";
+import { serde, Serialize, Deserialize } from "../lib";
 
 // Use array literal with as const to ensure proper type inference
 @derive([Serialize, Deserialize] as const)
