@@ -1,4 +1,4 @@
-# RustyTS
+# TSRustacean
 
 ## 🤔 What is this?
 
@@ -23,7 +23,7 @@ This library implements Rust-like features in TypeScript, including:
 ### `Option<T>`
 
 ```typescript
-import { Option } from "rustyts";
+import { Option } from "tsrustacean";
 
 const someValue = Option.some(42);
 console.log(someValue.unwrap()); // 42
@@ -53,7 +53,7 @@ console.log(unknownUser.unwrapOr("Guest")); // "Guest"
 ### `Result<T, E>`
 
 ```typescript
-import { Result } from "rustyts";
+import { Result } from "tsrustacean";
 
 const success = Result.ok<number, string>(100);
 console.log(success.unwrap()); // 100
@@ -82,7 +82,7 @@ console.log(result2.unwrapErr()); // "Division by zero"
 ### Pattern Matching with `Match`
 
 ```typescript
-import { Match, Option, Result } from "rustyts";
+import { Match, Option, Result } from "tsrustacean";
 
 const opt = Option.some(42);
 const result = Match.on(opt)
@@ -118,8 +118,8 @@ console.log(processResponse(Result.err("Network error"))); // "Error occurred: N
 You can extend classes dynamically with features using `@derive`.
 
 ```typescript
-import { derive } from "./derive";
-import { serde, Serialize, Deserialize } from "./lib/serde";
+import { derive } from "tsrustacean";
+import { serde, Serialize, Deserialize } from "tsrustacean";
 
 @derive([Serialize, Deserialize] as const)
 class User {
@@ -227,7 +227,7 @@ registerPlugin(loggablePlugin);
 ## Installation 📦
 
 ```sh
-npm install rustyts
+npm install tsrustacean
 ```
 
 ## Contributing 🤝
@@ -236,4 +236,4 @@ Feel free to contribute if you want to add more Rust-like features to this crazy
 
 ## License 📜
 
-The RustyTS is open-sourced software licensed under the [MIT license](LICENSE).
+The TSRustacean is open-sourced software licensed under the [MIT license](LICENSE).
