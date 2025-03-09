@@ -6,8 +6,11 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./lib/": "./dist/lib/"
+    "./lib/index.js": "./dist/lib/index.js"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "test": "jest",
     "build": "tsc"
