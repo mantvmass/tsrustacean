@@ -1,4 +1,4 @@
-# Rustify TS
+# RustyTS
 
 ## 🤔 What is this?
 
@@ -23,7 +23,7 @@ This library implements Rust-like features in TypeScript, including:
 ### `Option<T>`
 
 ```typescript
-import { Option } from "rustify-ts";
+import { Option } from "rustyts";
 
 const someValue = Option.some(42);
 console.log(someValue.unwrap()); // 42
@@ -53,7 +53,7 @@ console.log(unknownUser.unwrapOr("Guest")); // "Guest"
 ### `Result<T, E>`
 
 ```typescript
-import { Result } from "rustify-ts";
+import { Result } from "rustyts";
 
 const success = Result.ok<number, string>(100);
 console.log(success.unwrap()); // 100
@@ -82,7 +82,7 @@ console.log(result2.unwrapErr()); // "Division by zero"
 ### Pattern Matching with `Match`
 
 ```typescript
-import { Match, Option, Result } from "rustify-ts";
+import { Match, Option, Result } from "rustyts";
 
 const opt = Option.some(42);
 const result = Match.on(opt)
@@ -227,7 +227,7 @@ registerPlugin(loggablePlugin);
 ## Installation 📦
 
 ```sh
-npm install rustify-ts
+npm install rustyts
 ```
 
 ## Contributing 🤝
@@ -236,4 +236,4 @@ Feel free to contribute if you want to add more Rust-like features to this crazy
 
 ## License 📜
 
-The Rustify-TS is open-sourced software licensed under the [MIT license](LICENSE).
+The RustyTS is open-sourced software licensed under the [MIT license](LICENSE).
