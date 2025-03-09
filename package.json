@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./lib/": "./dist/lib/"
+    "./lib/serde": "./dist/lib/serde.js"
   },
   "scripts": {
     "test": "jest",
