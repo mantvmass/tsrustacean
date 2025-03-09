@@ -6,16 +6,19 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./lib": {
-      "import": "./dist/lib/index.js",
-      "types": "./dist/lib/index.d.ts"
+    ".": "./dist/index.js",
+    "./lib": "./dist/lib/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "typesVersions": {
+    "*": {
+      "lib": [
+        "dist/lib/index.d.ts"
+      ]
     }
   },
-  "files": ["dist"],
   "scripts": {
     "test": "jest",
     "build": "tsc"
