@@ -1,0 +1,19 @@
+{
+  "name": "rustify-ts",
+  "version": "1.0.0",
+  "description": "A TypeScript library inspired by Rust features",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Phumin Maliwan <kliop2317@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.6",
+    "typescript": "^5.8.2"
+  }
+}
