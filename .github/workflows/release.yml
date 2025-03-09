@@ -3,7 +3,7 @@ name: Build and Publish to npm
 on:
   push:
     tags:
-      - 'v*'  # Trigger เมื่อมีการ push tag ใดๆ เช่น v1.0.0
+      - 'v*'  # Trigger เมื่อมีการ push tag เช่น v1.0.0
 
 permissions:
   contents: read
@@ -32,11 +32,17 @@ jobs:
         id: vars
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
+          TAG_NAME=${TAG_NAME#v}  # เอา 'v' ออกจากเวอร์ชัน
           echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
+
+      - name: Update Package Version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          if [ "$CURRENT_VERSION" != "${{ env.TAG_NAME }}" ]; then
+            npm version ${{ env.TAG_NAME }} --no-git-tag-version
+          fi
 
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npm version ${{ env.TAG_NAME }} --no-git-tag-version
-          npm publish
+        run: npm publish
