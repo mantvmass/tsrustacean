@@ -1,43 +1,78 @@
-import { Option } from "./types";
-import { Result } from "./types";
+import { Option, Result } from "./types";
 
 /**
- * Defines a pattern for matching Option or Result values, inspired by Rust's `match` expression.
- * @template T The type of the value to match.
- * @template U The type of the result after matching.
+ * A fluent matcher for Option and Result types, simplifying pattern matching.
+ * Inspired by Rust's `match` with a chainable API for ease of use.
  */
-type MatchPattern<T, U> = {
-    /** Handler for Some(value) in Option. */
-    some?: (value: T) => U;
-    /** Handler for None in Option. */
-    none?: () => U;
-    /** Handler for Ok(value) in Result. */
-    ok?: (value: T) => U;
-    /** Handler for Err(error) in Result. */
-    err?: (error: any) => U;
-    /** Fallback handler if no pattern matches. */
-    default?: () => U;
-};
+export class Match<T, U> {
+    private constructor(
+        private value: Option<T> | Result<T, any>,
+        private result?: U
+    ) { }
 
-/**
- * Matches an Option or Result value against a pattern, returning the result of the matched handler.
- * @template T The type of the value to match.
- * @template U The type of the result after matching.
- * @param value The Option or Result instance to match.
- * @param pattern The pattern to apply.
- * @returns The result of the matched handler.
- * @throws {Error} If no matching pattern is provided.
- */
-function match<T, U>(value: Option<T> | Result<T, any>, pattern: MatchPattern<T, U>): U {
-    if (value instanceof Option) {
-        if (value.isSome() && pattern.some) return pattern.some(value.unwrap());
-        if (value.isNone() && pattern.none) return pattern.none();
-    } else if (value instanceof Result) {
-        if (value.isOk() && pattern.ok) return pattern.ok(value.unwrap());
-        if (value.isErr() && pattern.err) return pattern.err(value.unwrapErr());
+    /**
+     * Starts a match operation on an Option or Result value.
+     * @param value The value to match against.
+     * @returns A Match instance for chaining.
+     */
+    static on<T, U>(value: Option<T> | Result<T, any>): Match<T, U> {
+        return new Match(value);
     }
-    if (pattern.default) return pattern.default();
-    throw new Error("No matching pattern");
-}
 
-export { match, MatchPattern };
+    /**
+     * Handles the Some case for an Option.
+     * @param fn The function to execute if the value is Some.
+     * @returns The Match instance for chaining.
+     */
+    some(fn: (value: T) => U): Match<T, U> {
+        if (this.result === undefined && this.value instanceof Option && this.value.isSome()) {
+            this.result = fn(this.value.unwrap());
+        }
+        return this;
+    }
+
+    /**
+     * Handles the None case for an Option.
+     * @param fn The function to execute if the value is None.
+     * @returns The Match instance for chaining.
+     */
+    none(fn: () => U): Match<T, U> {
+        if (this.result === undefined && this.value instanceof Option && this.value.isNone()) {
+            this.result = fn();
+        }
+        return this;
+    }
+
+    /**
+     * Handles the Ok case for a Result.
+     * @param fn The function to execute if the value is Ok.
+     * @returns The Match instance for chaining.
+     */
+    ok(fn: (value: T) => U): Match<T, U> {
+        if (this.result === undefined && this.value instanceof Result && this.value.isOk()) {
+            this.result = fn(this.value.unwrap());
+        }
+        return this;
+    }
+
+    /**
+     * Handles the Err case for a Result.
+     * @param fn The function to execute if the value is Err.
+     * @returns The Match instance for chaining.
+     */
+    err(fn: (error: any) => U): Match<T, U> {
+        if (this.result === undefined && this.value instanceof Result && this.value.isErr()) {
+            this.result = fn(this.value.unwrapErr());
+        }
+        return this;
+    }
+
+    /**
+     * Provides a default case if no previous conditions match.
+     * @param fn The function to execute as a fallback.
+     * @returns The final result of the match operation.
+     */
+    default(fn: () => U): U {
+        return this.result !== undefined ? this.result : fn();
+    }
+}
