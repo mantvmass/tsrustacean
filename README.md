@@ -162,14 +162,18 @@ console.log(raw);
 // }
 
 // @ts-expect-error
-const response = UserResponseDTO.from(raw.serialize());
+const response = UserResponseDTO.from(raw);
 console.log(response);
 // Output:
 // DerivedClass {
 //   id: '1',
-//   balance: 10,
-//   created_at: 'Sun, 09 Mar 2025 14:58:21 GMT'
+//   balance: 1000,
+//   created_at: 'Sun, 09 Mar 2025 14:58:21 GMT',
+//   password: '1234'
 // }
+
+console.log(response.serialize());
+// Output: { id: '1', balance: 10, createdAt: 'Sun, 09 Mar 2025 14:58:21 GMT' }
 
 // I haven't found a way to make TypeScript recognize methods injected with @derive yet,
 // so for now, I'm using @ts-expect-error as a workaround...
