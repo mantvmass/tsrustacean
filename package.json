@@ -4,6 +4,10 @@
   "description": "A TypeScript library inspired by Rust features",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",         
+    "./lib/": "./dist/lib/"
+  },
   "scripts": {
     "test": "jest",
     "build": "tsc"
