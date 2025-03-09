@@ -236,4 +236,4 @@ Feel free to contribute if you want to add more Rust-like features to this crazy
 
 ## License 📜
 
-The PMSoyer framework is open-sourced software licensed under the [MIT license](LICENSE).
+The Rustify-TS is open-sourced software licensed under the [MIT license](LICENSE).
