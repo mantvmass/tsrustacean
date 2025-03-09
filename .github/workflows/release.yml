@@ -1,0 +1,42 @@
+name: Build and Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger เมื่อมีการ push tag ใดๆ เช่น v1.0.0
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.1'
+          registry-url: 'https://registry.npmjs.org'  # ตั้งค่า npm registry
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Extract Tag Name
+        id: vars
+        run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm version ${{ env.TAG_NAME }} --no-git-tag-version
+          npm publish

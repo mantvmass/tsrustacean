@@ -230,16 +230,10 @@ registerPlugin(loggablePlugin);
 npm install rustify
 ```
 
-or
-
-```sh
-yarn add rustify
-```
-
 ## Contributing 🤝
 
 Feel free to contribute if you want to add more Rust-like features to this crazy project. Open an issue or create a pull request! 🦀🚀
 
 ## License 📜
 
-The PMSoyer framework is open-sourced software licensed under the [MIT license]("/LICENSE").
+The PMSoyer framework is open-sourced software licensed under the [MIT license](LICENSE).
