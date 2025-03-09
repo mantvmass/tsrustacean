@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "description": "A TypeScript library inspired by Rust features",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./lib/index.js": "./dist/lib/index.js"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./lib": {
+      "import": "./dist/lib/index.js",
+      "types": "./dist/lib/index.d.ts"
+    }
   },
-  "files": [
-    "dist/**/*"
-  ],
+  "files": ["dist"],
   "scripts": {
     "test": "jest",
     "build": "tsc"
