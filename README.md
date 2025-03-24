@@ -119,7 +119,7 @@ You can extend classes dynamically with features using `@derive`.
 
 ```typescript
 import { derive } from "tsrustacean";
-import { serde, Serialize, Deserialize } from "tsrustacean";
+import { Deserialize, serde, Serialize } from "tsrustacean/lib"
 
 @derive([Serialize, Deserialize] as const)
 class User {
